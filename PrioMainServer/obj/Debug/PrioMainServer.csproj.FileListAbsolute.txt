@@ -1,0 +1,6 @@
+C:\Users\mathe\source\repos\PrioScript\PrioMainServer\obj\Debug\PrioMainServer.csproj.AssemblyReference.cache
+C:\Users\mathe\source\repos\PrioScript\PrioMainServer\obj\Debug\PrioMainServer.csproj.CoreCompileInputs.cache
+C:\FXServer\server-data\cfx-server-data\resources\prioScript\PrioMainServer.net.dll
+C:\FXServer\server-data\cfx-server-data\resources\prioScript\PrioMainServer.net.pdb
+C:\Users\mathe\source\repos\PrioScript\PrioMainServer\obj\Debug\PrioMainServer.net.dll
+C:\Users\mathe\source\repos\PrioScript\PrioMainServer\obj\Debug\PrioMainServer.net.pdb
