@@ -16,11 +16,16 @@ namespace PrioScript
             PrioHud.DrawText();
         }
 
-        [EventHandler("TogglePrioHud")]
-        private void Hud(string zone1, string zone2)
+        [EventHandler("PrioPause")]
+        private void PrioPause(string zone)
         {
-            PrioHud.ToogleHud(zone1, zone2);
-            Player player = Game.Player;
+            PrioHud.PrioPause(zone);
+        }
+
+        [EventHandler("PrioCd")]
+        private void PrioCd(string zone, int minutes)
+        {
+            PrioHud.PrioCd(zone, minutes);
         }
     }
 }

@@ -45,7 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PrioConfig.cs" />
     <Compile Include="PrioMainServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
