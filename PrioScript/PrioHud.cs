@@ -10,55 +10,60 @@ namespace PrioScript
     {
         public static Dictionary<string, string> status = new Dictionary<string, string>()
         {
-            { "available", "~g~Available" },
-            { "onHold", "~y~On Hold" },
-            { "cd", "~y~min Cooldown" },
-            { "active", "~r~Active" }
+            { "av", "~g~Available" },
+            { "oh", "~y~On Hold" },
+            { "cd", "~b~Cooldown" },
+            { "ac", "~r~Active" }
         };
 
-        public static bool visible = false;
+        private static string cityStatus;
+        private static string countyStatus;
 
-        private static readonly string cityPrioHud = $"~w~City Priority:";
-        private static readonly string countyPrioHud = $"~w~County Priority:";
+        private static string cityHud;
+        private static string countyHud;
 
-        private static string cityStatus = status["available"];
-        private static string countyStatus = status["available"];
+        private static Player cityPrioPlayer;
+        private static Player countyPrioPlayer;
 
-        private static string cityStatusHud = status["available"];
-        private static string countyStatusHud = status["available"];
-
-        private static bool cityIsPrioActive = false;
-        private static Player cityActivePrioPlayer;
-        private static bool countyIsPrioActive = false;
-        private static Player countyActivePrioPlayer;
+        public static void UpdateHud(string NewCityHud, string NewCountyHud, string newCityStatus, string newCountyStatus)
+        {
+            cityHud = NewCityHud;
+            countyHud = NewCountyHud;
+            cityStatus = newCityStatus;
+            countyStatus = newCountyStatus;
+        }
 
         public static void PrioPause(string zone)
         {
             if (zone == "city")
             {
-                if (cityStatus == status["available"])
+                if (cityStatus == status["av"])
                 {
-                    cityStatus = status["onHold"];
-                    cityStatusHud = cityStatus;
+                    cityStatus = status["oh"];
+                    cityHud = status["oh"];
+                    TriggerServerEvent("UpdateHud", cityHud, countyHud, cityStatus, countyStatus);
                 }
                 else
                 {
-                    cityStatus = status["available"];
-                    cityStatusHud = cityStatus;
+                    cityStatus = status["av"];
+                    cityHud = status["av"];
+                    TriggerServerEvent("UpdateHud", cityHud, countyHud, cityStatus, countyStatus);
                 }
             }
 
             if (zone == "county")
             {
-                if (countyStatus == status["available"])
+                if (countyStatus == status["av"])
                 {
-                    countyStatus = status["onHold"];
-                    countyStatusHud = countyStatus;
+                    countyStatus = status["oh"];
+                    countyHud = status["ah"];
+                    TriggerServerEvent("UpdateHud", cityHud, countyHud, cityStatus, countyStatus);
                 }
                 else
                 {
-                    countyStatus = status["available"];
-                    countyStatusHud = countyStatus;
+                    countyStatus = status["av"];
+                    countyHud = status["av"];
+                    TriggerServerEvent("UpdateHud", cityHud, countyHud, cityStatus, countyStatus);
                 }
             }
         }
@@ -67,27 +72,48 @@ namespace PrioScript
         {
             if (zone == "city")
             {
-                for (int i = minutes; i > 0; i--)
+                if (cityStatus == status["ac"] || cityStatus == status["cd"])
                 {
-                    cityStatus = status["cd"];
-                    cityStatusHud = $"~b~{i} {cityStatus}";
-                    await Delay(60000);
+                    if (minutes > 0)
+                    {
+                        cityStatus = status["cd"];
+                        cityHud = $"{status["cd"]} ({minutes} minutes)";
+                        TriggerServerEvent("UpdateHud", cityHud, countyHud, cityStatus, countyStatus);
+                    }
+                    else
+                    {
+                        cityStatus = status["av"];
+                        cityHud = status["av"];
+                        TriggerServerEvent("UpdateHud", cityHud, countyHud, cityStatus, countyStatus);
+                    }
                 }
-                cityStatus = status["available"];
-                cityStatusHud = cityStatus;
+                else
+                {
+                    CommonFunctions.DrawWarning($"~w~You ~r~can't activate ~b~cooldown ~w~in the {zone}");
+                }
             }
 
             if (zone == "county")
             {
-                for (int x = minutes; x > 0; x--)
+                if (countyStatus == status["ac"] && countyPrioPlayer.Handle == Game.Player.Handle || !countyPrioPlayer.IsPlaying)
                 {
-                    countyStatus = status["cd"];
-                    countyStatusHud = $"~b~{x} {countyStatus}";
-                    await Delay(60000);
+                    if (minutes > 0)
+                    {
+                        countyStatus = status["cd"];
+                        countyHud = $"{status["cd"]} ({minutes} minutes)";
+                        TriggerServerEvent("UpdateHud", cityHud, countyHud, cityStatus, countyStatus);
+                    }
+                    else
+                    {
+                        countyStatus = status["av"];
+                        countyHud = status["av"];
+                        TriggerServerEvent("UpdateHud", cityHud, countyHud, cityStatus, countyStatus);
+                    }
                 }
-
-                countyStatus = status["available"];
-                countyStatusHud = countyStatus;
+                else
+                {
+                    CommonFunctions.DrawWarning($"~w~You ~r~can't activate ~b~cooldown ~w~in the {zone}");
+                }
             }
         }
 
@@ -95,24 +121,20 @@ namespace PrioScript
         {
             if (zone == "city")
             {
-                cityActivePrioPlayer = sourcePlayer;
-                if (cityIsPrioActive == false)
+                if (cityStatus == status["av"])
                 {
-                    cityIsPrioActive = true;
-                    cityStatus = status["active"];
-                    cityStatusHud = $"{cityStatus} {cityActivePrioPlayer.Name}";
+                    cityPrioPlayer = sourcePlayer;
+                    cityStatus = status["ac"];
+                    cityHud = $"{status["ac"]} ({cityPrioPlayer.Name})";
+                    TriggerServerEvent("UpdateHud", cityHud, countyHud, cityStatus, countyStatus);
                 }
-                else if (cityIsPrioActive && cityActivePrioPlayer.Handle == Game.Player.Handle || cityActivePrioPlayer.IsPlaying == false)
+                else if (cityStatus == status["ac"])
                 {
-                    cityIsPrioActive = false;
-                    cityStatus = status["available"];
+                    CommonFunctions.DrawWarning($"There is already an ~r~active ~w~priority in the ~b~{zone}!");
                 }
-                else if (cityIsPrioActive && cityActivePrioPlayer.Handle != Game.Player.Handle)
+                else
                 {
-                    API.ClearPrints();
-                    API.SetTextEntry_2("STRING");
-                    API.AddTextComponentString($"There is already an ~r~active ~w~priority in the ~b~{zone}!");
-                    API.DrawSubtitleTimed(3000, true);
+                    CommonFunctions.DrawWarning("The ~r~priority ~w~in the ~bi~city ~w~is ~y~On Hold!");
                 }
             }
         }
@@ -126,8 +148,8 @@ namespace PrioScript
             API.SetTextDropShadow();
             API.SetTextOutline();
             API.SetTextEntry("STRING");
-            API.AddTextComponentString($"{cityPrioHud} {cityStatusHud}");
-            API.DrawText(0.168f, 0.8725f);
+            API.AddTextComponentString($"~w~County Priority: {countyHud}");
+            API.DrawText(0.168f, 0.8520f);
 
             API.SetTextFont(0);
             API.SetTextScale(0.0f, 0.3f);
@@ -136,8 +158,8 @@ namespace PrioScript
             API.SetTextDropShadow();
             API.SetTextOutline();
             API.SetTextEntry("STRING");
-            API.AddTextComponentString($"{countyPrioHud} {countyStatusHud}");
-            API.DrawText(0.168f, 0.8520f);
+            API.AddTextComponentString($"~w~City Priority: {cityHud}");
+            API.DrawText(0.168f, 0.8725f);
         }
     }
 }
