@@ -1,7 +1,6 @@
 ﻿using CitizenFX.Core;
 using static CitizenFX.Core.Native.API;
 using System;
-using NDCore.Functions;
 
 namespace PrioScript
 {
@@ -15,13 +14,20 @@ namespace PrioScript
 
         public PrioMainServer()
         {
-            RegisterCommand("citypriop", new Action(CityPrioPause), false);
-            RegisterCommand("countypriop", new Action(CountyPrioPause), false);
+            RegisterCommand("citypriop", new Action(CityPrioPause), true);
+            RegisterCommand("countypriop", new Action(CountyPrioPause), true);
 
             RegisterCommand("citypcd10", new Action(CityPrioCd10), false);
-            RegisterCommand("countypcd10", new Action(CountyPrioCd), false);
+            RegisterCommand("countypcd10", new Action(CountyPrioCd10), false);
+
+            RegisterCommand("citypcd45", new Action(CityPrioCd45), false);
+            RegisterCommand("countypcd45", new Action(CountyPrioCd45), false);
+
+            RegisterCommand("citypcd60", new Action(CityPrioCd60), false);
+            RegisterCommand("countypcd60", new Action(CountyPrioCd60), false);
 
             RegisterCommand("citypa", new Action(CityPrio), false);
+            RegisterCommand("countypa", new Action(CountyPrio), false);
         }
 
         [EventHandler("playerIds")]
@@ -69,14 +75,59 @@ namespace PrioScript
             }
         }
 
-        public void CountyPrioCd()
+        public async void CityPrioCd45()
         {
-            TriggerClientEvent("PrioCd", "county", 3);
+            for (int i = 45; i > -1; i--)
+            {
+                TriggerClientEvent("PrioCd", "city", i);
+                await Delay(60000);
+            }
+        }
+
+        public async void CityPrioCd60()
+        {
+            for (int i = 60; i > -1; i--)
+            {
+                TriggerClientEvent("PrioCd", "city", i);
+                await Delay(60000);
+            }
+        }
+
+        public async void CountyPrioCd10()
+        {
+            for (int i = 10; i > -1; i--)
+            {
+                TriggerClientEvent("PrioCd", "county", i);
+                await Delay(60000);
+            }
+        }
+
+        public async void CountyPrioCd45()
+        {
+            for (int i = 45; i > -1; i--)
+            {
+                TriggerClientEvent("PrioCd", "county", i);
+                await Delay(60000);
+            }
+        }
+
+        public async void CountyPrioCd60()
+        {
+            for (int i = 60; i > -1; i--)
+            {
+                TriggerClientEvent("PrioCd", "county", i);
+                await Delay(60000);
+            }
         }
 
         public void CityPrio()
         {
             TriggerClientEvent("PrioActive", "city");
+        }
+
+        public void CountyPrio()
+        {
+            TriggerClientEvent("PrioActive", "county");
         }
     }
 }

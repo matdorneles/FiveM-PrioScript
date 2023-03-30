@@ -92,10 +92,9 @@ namespace PrioScript
                     CommonFunctions.DrawWarning($"~w~You ~r~can't activate ~b~cooldown ~w~in the {zone}");
                 }
             }
-
-            if (zone == "county")
+            else if (zone == "county")
             {
-                if (countyStatus == status["ac"] && countyPrioPlayer.Handle == Game.Player.Handle || !countyPrioPlayer.IsPlaying)
+                if (cityStatus == status["ac"] || cityStatus == status["cd"])
                 {
                     if (minutes > 0)
                     {
@@ -137,6 +136,24 @@ namespace PrioScript
                     CommonFunctions.DrawWarning("The ~r~priority ~w~in the ~bi~city ~w~is ~y~On Hold!");
                 }
             }
+            else if (zone == "county")
+            {
+                if (countyStatus == status["av"])
+                {
+                    countyPrioPlayer = sourcePlayer;
+                    countyStatus = status["ac"];
+                    countyHud = $"{status["ac"]} ({countyPrioPlayer.Name})";
+                    TriggerServerEvent("UpdateHud", cityHud, countyHud, cityStatus, countyStatus);
+                }
+                else if (countyStatus == status["ac"])
+                {
+                    CommonFunctions.DrawWarning($"There is already an ~r~active ~w~priority in the ~b~{zone}!");
+                }
+                else
+                {
+                    CommonFunctions.DrawWarning("The ~r~priority ~w~in the ~bi~city ~w~is ~y~On Hold!");
+                }
+            }
         }
 
         public static void DrawText()
@@ -148,7 +165,7 @@ namespace PrioScript
             API.SetTextDropShadow();
             API.SetTextOutline();
             API.SetTextEntry("STRING");
-            API.AddTextComponentString($"~w~County Priority: {countyHud}");
+            API.AddTextComponentString($"~w~~h~County Priority: {countyHud}");
             API.DrawText(0.168f, 0.8520f);
 
             API.SetTextFont(0);
@@ -158,7 +175,7 @@ namespace PrioScript
             API.SetTextDropShadow();
             API.SetTextOutline();
             API.SetTextEntry("STRING");
-            API.AddTextComponentString($"~w~City Priority: {cityHud}");
+            API.AddTextComponentString($"~w~~h~City Priority: {cityHud}");
             API.DrawText(0.168f, 0.8725f);
         }
     }
