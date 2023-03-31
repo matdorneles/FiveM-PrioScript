@@ -51,7 +51,7 @@ namespace PrioScript
         }
 
         [EventHandler("PrioActive")]
-        private void PrioActive([FromSource] Player player, string zone)
+        private void PrioActive(string zone, [FromSource] Player player)
         {
             PrioHud.PrioActive(player, zone);
         }
