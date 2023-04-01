@@ -57,10 +57,13 @@ namespace PrioScript
             TriggerServerEvent("LogToDiscord", "staff", $"{player.Name} activated priority in the city");
         }
 
-        [EventHandler("PrioActiveCounty")]
-        private void PrioActive([FromSource] Player player) {
-            PrioHud.PrioActive(player, "county");
-            TriggerServerEvent("LogToDiscord", "staff", $"{player.Name} activated priority in the county");
+        class CountyCalls {
+
+            [EventHandler("PrioActiveCounty")]
+            private void PrioActive([FromSource] Player player) {
+                PrioHud.PrioActive(player, "county");
+                TriggerServerEvent("LogToDiscord", "staff", $"{player.Name} activated priority in the county");
+            }
         }
     }
 }
