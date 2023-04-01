@@ -50,10 +50,17 @@ namespace PrioScript
             PrioHud.PrioCd(zone, minutes);
         }
 
-        [EventHandler("PrioActive")]
-        private void PrioActive(string zone, [FromSource] Player player)
+        [EventHandler("PrioActiveCity")]
+        private void PrioActive([FromSource] Player player)
         {
-            PrioHud.PrioActive(player, zone);
+            PrioHud.PrioActive(player, "city");
+            TriggerServerEvent("LogToDiscord", "staff", $"{player.Name} activated priority in the city");
+        }
+
+        [EventHandler("PrioActiveCounty")]
+        private void PrioActive([FromSource] Player player) {
+            PrioHud.PrioActive(player, "county");
+            TriggerServerEvent("LogToDiscord", "staff", $"{player.Name} activated priority in the county");
         }
     }
 }

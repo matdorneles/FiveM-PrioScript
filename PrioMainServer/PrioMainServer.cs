@@ -122,12 +122,12 @@ namespace PrioScript
 
         public void CityPrio()
         {
-            TriggerClientEvent("PrioActive", "city");
+            TriggerClientEvent("PrioActiveCity");
         }
 
         public void CountyPrio()
         {
-            TriggerClientEvent("PrioActive", "county");
+            TriggerClientEvent("PrioActiveCounty");
         }
     }
 }
