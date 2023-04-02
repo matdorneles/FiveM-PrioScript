@@ -1,7 +1,8 @@
 ﻿using System;
+using System.Security.Policy;
 using System.Threading.Tasks;
 using CitizenFX.Core;
-using CitizenFX.Core.Native;
+using static CitizenFX.Core.Native.API;
 
 namespace PrioScript
 {
@@ -13,6 +14,10 @@ namespace PrioScript
         {
             Tick += OnTick;
             EventHandlers["onClientResourceStart"] += new Action<string>(onClientResourceStart);
+
+
+            RegisterCommand("citypa", new Action(CityPrio), false);
+            RegisterCommand("countypa", new Action(CountyPrio), false);
         }
 
         private async Task OnTick()
@@ -50,20 +55,18 @@ namespace PrioScript
             PrioHud.PrioCd(zone, minutes);
         }
 
-        [EventHandler("PrioActiveCity")]
-        private void PrioActive([FromSource] Player player)
+        private void CityPrio()
         {
+            Player player = Game.Player;
             PrioHud.PrioActive(player, "city");
             TriggerServerEvent("LogToDiscord", "staff", $"{player.Name} activated priority in the city");
         }
 
-        class CountyCalls {
-
-            [EventHandler("PrioActiveCounty")]
-            private void PrioActive([FromSource] Player player) {
-                PrioHud.PrioActive(player, "county");
-                TriggerServerEvent("LogToDiscord", "staff", $"{player.Name} activated priority in the county");
-            }
+        private void CountyPrio()
+        {
+            Player player = Game.Player;
+            PrioHud.PrioActive(player, "county");
+            TriggerServerEvent("LogToDiscord", "staff", $"{player.Name} activated priority in the county");
         }
     }
 }

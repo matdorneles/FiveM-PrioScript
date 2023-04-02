@@ -26,18 +26,6 @@ namespace PrioScript
             RegisterCommand("citypcd60", new Action(CityPrioCd60), false);
             RegisterCommand("countypcd60", new Action(CountyPrioCd60), false);
 
-            RegisterCommand("citypa", new Action(CityPrio), false);
-            RegisterCommand("countypa", new Action(CountyPrio), false);
-        }
-
-        [EventHandler("playerIds")]
-        private void GetPlayerIds([FromSource]Player player)
-        {
-            int playerIds = GetNumPlayerIdentifiers(player.Handle);
-            for (int i = 0; i < playerIds; i++)
-            {
-                Debug.WriteLine(GetPlayerIdentifier(player.Handle, i));
-            }
         }
 
         [EventHandler("sync")]
@@ -118,16 +106,6 @@ namespace PrioScript
                 TriggerClientEvent("PrioCd", "county", i);
                 await Delay(60000);
             }
-        }
-
-        public void CityPrio()
-        {
-            TriggerClientEvent("PrioActiveCity");
-        }
-
-        public void CountyPrio()
-        {
-            TriggerClientEvent("PrioActiveCounty");
         }
     }
 }

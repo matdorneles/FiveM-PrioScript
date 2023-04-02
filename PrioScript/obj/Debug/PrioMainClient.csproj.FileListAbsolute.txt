@@ -4,3 +4,4 @@ C:\Users\mathe\source\repos\PrioScript\PrioScript\bin\Debug\PrioScript.dll
 C:\Users\mathe\source\repos\PrioScript\output\PrioScript.net.dll
 C:\Users\mathe\source\repos\PrioScript\PrioScript\obj\Debug\PrioScript.net.dll
 C:\FXServer\server-data\cfx-server-data\resources\prioScript\PrioScript.net.dll
+C:\Users\mathe\source\repos\PrioScript\PrioScript\obj\Debug\PrioMainClient.csproj.CopyComplete
