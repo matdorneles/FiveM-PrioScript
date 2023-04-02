@@ -8,7 +8,7 @@ namespace PrioScript
 {
     public class Main : BaseScript
     {
-        public static bool playerSynced;
+        public static bool playerSynced = false;
 
         public Main()
         {
@@ -30,10 +30,8 @@ namespace PrioScript
             Player player = Game.Player;
             if (!playerSynced)
             {
-                playerSynced = false;
                 TriggerServerEvent("sync");
                 playerSynced = true;
-                TriggerServerEvent("playerIds");
             }
         }
 

@@ -1,11 +1,20 @@
 ﻿using CitizenFX.Core;
 using static CitizenFX.Core.Native.API;
 using System;
+using System.Collections.Generic;
 
 namespace PrioScript
 {
     internal class PrioMainServer : BaseScript
     {
+        public static Dictionary<string, string> status = new Dictionary<string, string>()
+        {
+            { "av", "~g~Available" },
+            { "oh", "~y~On Hold" },
+            { "cd", "~b~Cooldown" },
+            { "ac", "~r~Active" }
+        };
+
         private static string cityStatus = "~y~On Hold";
         private static string countyStatus = "~g~Available";
 
@@ -56,55 +65,73 @@ namespace PrioScript
 
         public async void CityPrioCd10()
         {
-            for (int i = 10; i > -1; i--)
+            if (cityStatus == status["ac"] &&  cityStatus != status["cd"])
             {
-                TriggerClientEvent("PrioCd", "city", i);
-                await Delay(60000);
+                for (int i = 10; i > -1; i--)
+                {
+                    TriggerClientEvent("PrioCd", "city", i);
+                    await Delay(60000);
+                }
             }
         }
 
         public async void CityPrioCd45()
         {
-            for (int i = 45; i > -1; i--)
+            if (cityStatus == status["ac"] && cityStatus != status["cd"])
             {
-                TriggerClientEvent("PrioCd", "city", i);
-                await Delay(60000);
+                for (int i = 45; i > -1; i--)
+                {
+                    TriggerClientEvent("PrioCd", "city", i);
+                    await Delay(60000);
+                }
             }
         }
 
         public async void CityPrioCd60()
         {
-            for (int i = 60; i > -1; i--)
+            if (cityStatus == status["ac"] && cityStatus != status["cd"])
             {
-                TriggerClientEvent("PrioCd", "city", i);
-                await Delay(60000);
+                for (int i = 60; i > -1; i--)
+                {
+                    TriggerClientEvent("PrioCd", "city", i);
+                    await Delay(60000);
+                }
             }
         }
 
         public async void CountyPrioCd10()
         {
-            for (int i = 10; i > -1; i--)
+            if (countyStatus == status["ac"] &&  countyStatus != status["cd"])
             {
-                TriggerClientEvent("PrioCd", "county", i);
-                await Delay(60000);
+                for (int i = 10; i > -1; i--)
+                {
+                    TriggerClientEvent("PrioCd", "county", i);
+                    await Delay(60000);
+                }
             }
         }
 
         public async void CountyPrioCd45()
         {
-            for (int i = 45; i > -1; i--)
+            if (countyStatus == status["ac"] && countyStatus != status["cd"])
             {
-                TriggerClientEvent("PrioCd", "county", i);
-                await Delay(60000);
+                for (int i = 45; i > -1; i--)
+                {
+                    TriggerClientEvent("PrioCd", "county", i);
+                    await Delay(60000);
+                }
             }
         }
 
         public async void CountyPrioCd60()
         {
-            for (int i = 60; i > -1; i--)
+            if (countyStatus == status["ac"] && countyStatus != status["cd"])
             {
-                TriggerClientEvent("PrioCd", "county", i);
-                await Delay(60000);
+                for (int i = 60; i > -1; i--)
+                {
+                    TriggerClientEvent("PrioCd", "county", i);
+                    await Delay(60000);
+                }
             }
         }
     }
