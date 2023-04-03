@@ -4,3 +4,9 @@ C:\FXServer\server-data\cfx-server-data\resources\prioScript\PrioMainServer.net.
 C:\FXServer\server-data\cfx-server-data\resources\prioScript\PrioMainServer.net.pdb
 C:\Users\mathe\source\repos\PrioScript\PrioMainServer\obj\Debug\PrioMainServer.net.dll
 C:\Users\mathe\source\repos\PrioScript\PrioMainServer\obj\Debug\PrioMainServer.net.pdb
+D:\FXServer\server-data\cfx-server-data\resources\prioScript\PrioMainServer.net.dll
+D:\FXServer\server-data\cfx-server-data\resources\prioScript\PrioMainServer.net.pdb
+D:\ORP\OBRP WorkIP\FiveM-PrioScript-main\FiveM-PrioScript\PrioMainServer\obj\Debug\PrioMainServer.csproj.AssemblyReference.cache
+D:\ORP\OBRP WorkIP\FiveM-PrioScript-main\FiveM-PrioScript\PrioMainServer\obj\Debug\PrioMainServer.csproj.CoreCompileInputs.cache
+D:\ORP\OBRP WorkIP\FiveM-PrioScript-main\FiveM-PrioScript\PrioMainServer\obj\Debug\PrioMainServer.net.dll
+D:\ORP\OBRP WorkIP\FiveM-PrioScript-main\FiveM-PrioScript\PrioMainServer\obj\Debug\PrioMainServer.net.pdb
