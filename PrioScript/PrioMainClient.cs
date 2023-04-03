@@ -15,6 +15,14 @@ namespace PrioScript
             Tick += OnTick;
             EventHandlers["onClientResourceStart"] += new Action<string>(onClientResourceStart);
 
+            RegisterCommand("citypcd10", new Action(CityPrioCd10), false);
+            RegisterCommand("countypcd10", new Action(CountyPrioCd10), false);
+
+            RegisterCommand("citypcd45", new Action(CityPrioCd45), false);
+            RegisterCommand("countypcd45", new Action(CountyPrioCd45), false);
+
+            RegisterCommand("citypcd60", new Action(CityPrioCd60), false);
+            RegisterCommand("countypcd60", new Action(CountyPrioCd60), false);
 
             RegisterCommand("citypa", new Action(CityPrio), false);
             RegisterCommand("countypa", new Action(CountyPrio), false);
@@ -47,10 +55,40 @@ namespace PrioScript
             PrioHud.PrioPause(zone);
         }
 
-        [EventHandler("PrioCd")]
-        private void PrioCd(string zone, int minutes)
+        private void CityPrioCd10()
         {
-            PrioHud.PrioCd(zone, minutes);
+            if (PrioHud.CdCheck("city"))
+                TriggerServerEvent("CityPrioCd", 10);
+        }
+
+        private void CityPrioCd45()
+        {
+            if (PrioHud.CdCheck("city"))
+                TriggerServerEvent("CityPrioCd", 10);
+        }
+
+        private void CityPrioCd60()
+        {
+            if (PrioHud.CdCheck("city"))
+                TriggerServerEvent("CityPrioCd", 10);
+        }
+
+        private void CountyPrioCd10()
+        {
+            if (PrioHud.CdCheck("county"))
+                TriggerServerEvent("CountyPrioCd", 10);
+        }
+
+        private void CountyPrioCd45()
+        {
+            if (PrioHud.CdCheck("county"))
+                TriggerServerEvent("CountyPrioCd", 10);
+        }
+
+        private void CountyPrioCd60()
+        {
+            if (PrioHud.CdCheck("county"))
+                TriggerServerEvent("CountyPrioCd", 10);
         }
 
         private void CityPrio()

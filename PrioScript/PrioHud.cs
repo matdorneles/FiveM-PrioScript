@@ -68,52 +68,31 @@ namespace PrioScript
             }
         }
 
-        public static async void PrioCd(string zone, int minutes)
+        public static bool CdCheck(string zone)
         {
             if (zone == "city")
             {
-                if (cityStatus == status["ac"] || cityStatus == status["cd"])
+                if (cityStatus == status["cd"])
                 {
-                    if (minutes > 0)
-                    {
-                        cityStatus = status["cd"];
-                        cityHud = $"{status["cd"]} ({minutes} minutes)";
-                        TriggerServerEvent("UpdateHud", cityHud, countyHud, cityStatus, countyStatus);
-                    }
-                    else
-                    {
-                        cityStatus = status["av"];
-                        cityHud = status["av"];
-                        TriggerServerEvent("UpdateHud", cityHud, countyHud, cityStatus, countyStatus);
-                    }
+                    CommonFunctions.DrawWarning($"Priority in the {zone} is already in cooldown!!");
+                    return true;
                 }
-                else
-                {
-                    CommonFunctions.DrawWarning($"~w~You ~r~can't activate ~b~cooldown ~w~in the {zone}");
-                }
+
+                return false;
             }
-            else if (zone == "county")
+
+            if (zone == "county")
             {
-                if (cityStatus == status["ac"] || cityStatus == status["cd"])
+                if (countyStatus == status["cd"])
                 {
-                    if (minutes > 0)
-                    {
-                        countyStatus = status["cd"];
-                        countyHud = $"{status["cd"]} ({minutes} minutes)";
-                        TriggerServerEvent("UpdateHud", cityHud, countyHud, cityStatus, countyStatus);
-                    }
-                    else
-                    {
-                        countyStatus = status["av"];
-                        countyHud = status["av"];
-                        TriggerServerEvent("UpdateHud", cityHud, countyHud, cityStatus, countyStatus);
-                    }
+                    CommonFunctions.DrawWarning($"Priority in the {zone} is already in cooldown!!");
+                    return true;
                 }
-                else
-                {
-                    CommonFunctions.DrawWarning($"~w~You ~r~can't activate ~b~cooldown ~w~in the {zone}");
-                }
+
+                return false;
             }
+
+            return false;
         }
 
         public static void PrioActive(Player sourcePlayer, string zone)
