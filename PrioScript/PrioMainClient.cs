@@ -93,16 +93,20 @@ namespace PrioScript
 
         private void CityPrio()
         {
-            Player player = Game.Player;
-            PrioHud.PrioActive(player, "city");
-            TriggerServerEvent("LogToDiscord", "staff", $"{player.Name} activated priority in the city");
+            if (PrioHud.PrioCheck("city"))
+            {
+                TriggerServerEvent("ActivatePrio", "city");
+                TriggerServerEvent("LogToDiscord", "staff", $"{Game.Player.Name} activated priority in the city");
+            }
         }
 
         private void CountyPrio()
         {
-            Player player = Game.Player;
-            PrioHud.PrioActive(player, "county");
-            TriggerServerEvent("LogToDiscord", "staff", $"{player.Name} activated priority in the county");
+            if (PrioHud.PrioCheck("county"))
+            {
+                TriggerServerEvent("ActivatePrio", "city");
+                TriggerServerEvent("LogToDiscord", "staff", $"{Game.Player.Name} activated priority in the county");
+            }
         }
     }
 }

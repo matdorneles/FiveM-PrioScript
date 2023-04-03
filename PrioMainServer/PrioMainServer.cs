@@ -18,8 +18,11 @@ namespace PrioScript
         private static string cityStatus = "~y~On Hold";
         private static string countyStatus = "~g~Available";
 
-        string CityHud = "~y~On Hold";
-        string CountyHud = "~g~Available";
+        private static Player CityPlayer;
+        private static Player CountyPlayer;
+
+        static string CityHud = "~y~On Hold";
+        static string CountyHud = "~g~Available";
 
         public PrioMainServer()
         {
@@ -88,6 +91,25 @@ namespace PrioScript
                     TriggerClientEvent("UpdateHud", CityHud, CountyHud, cityStatus, countyStatus);
                     await Delay(60000);
                 }
+            }
+        }
+
+        [EventHandler("ActivatePrio")]
+        public static void PrioActive([FromSource] Player sourcePlayer, string zone)
+        {
+            if (zone == "city" && cityStatus == status["av"])
+            {
+                cityStatus = status["ac"];
+                CityPlayer = sourcePlayer;
+                CityHud = $"{status["ac"]} ({CityPlayer.Name})";
+                TriggerClientEvent("UpdateHud", CityHud, CountyHud, cityStatus, countyStatus);
+            }
+            else if (zone == "county" && countyStatus == status["av"])
+            {
+                countyStatus = status["ac"];
+                CountyPlayer = sourcePlayer;
+                CityHud = $"{status["ac"]} ({CountyPlayer.Name})";
+                TriggerClientEvent("UpdateHud", CityHud, CountyHud, cityStatus, countyStatus);
             }
         }
     }

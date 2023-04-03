@@ -22,9 +22,6 @@ namespace PrioScript
         private static string cityHud;
         private static string countyHud;
 
-        private static Player cityPrioPlayer;
-        private static Player countyPrioPlayer;
-
         public static void UpdateHud(string NewCityHud, string NewCountyHud, string newCityStatus, string newCountyStatus)
         {
             cityHud = NewCityHud;
@@ -75,10 +72,10 @@ namespace PrioScript
                 if (cityStatus == status["cd"])
                 {
                     CommonFunctions.DrawWarning($"Priority in the {zone} is already in cooldown!!");
-                    return true;
+                    return false;
                 }
 
-                return false;
+                return true;
             }
 
             if (zone == "county")
@@ -86,53 +83,59 @@ namespace PrioScript
                 if (countyStatus == status["cd"])
                 {
                     CommonFunctions.DrawWarning($"Priority in the {zone} is already in cooldown!!");
+                    return false;
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
+        public static bool PrioCheck(string zone)
+        {
+            if (zone == "city")
+            {
+                if (cityStatus == status["cd"])
+                {
+                    CommonFunctions.DrawWarning($"The ~y~{zone} priority ~w~is on cooldown!!");
+                    return false;
+                }
+                else if (cityStatus == status["av"])
+                {
+                    CommonFunctions.DrawWarning($"You just ~r~activated ~w~the {zone} priority!!");
                     return true;
+                }
+                else
+                {
+                    CommonFunctions.DrawWarning($"You can't start a priority in the {zone}");
+                    return false;
+                }
+
+                return false;
+            }
+            else if (zone == "county")
+            {
+                if (countyStatus == status["cd"])
+                {
+                    CommonFunctions.DrawWarning($"The ~y~{zone} priority ~w~is on cooldown!!");
+                    return false;
+                }
+                else if (countyStatus == status["av"])
+                {
+                    CommonFunctions.DrawWarning($"You just ~r~activated ~w~the {zone} priority!!");
+                    return true;
+                }
+                else
+                {
+                    CommonFunctions.DrawWarning($"You can't start a priority in the {zone}");
+                    return false;
                 }
 
                 return false;
             }
 
             return false;
-        }
-
-        public static void PrioActive(Player sourcePlayer, string zone)
-        {
-            if (zone == "city")
-            {
-                if (cityStatus == status["av"])
-                {
-                    cityPrioPlayer = sourcePlayer;
-                    cityStatus = status["ac"];
-                    cityHud = $"{status["ac"]} ({cityPrioPlayer.Name})";
-                    TriggerServerEvent("UpdateHud", cityHud, countyHud, cityStatus, countyStatus);
-                }
-                else if (cityStatus == status["ac"])
-                {
-                    CommonFunctions.DrawWarning($"There is already an ~r~active ~w~priority in the ~b~{zone}!");
-                }
-                else
-                {
-                    CommonFunctions.DrawWarning("The ~r~priority ~w~in the ~bi~city ~w~is ~y~On Hold!");
-                }
-            }
-            else if (zone == "county")
-            {
-                if (countyStatus == status["av"])
-                {
-                    countyPrioPlayer = sourcePlayer;
-                    countyStatus = status["ac"];
-                    countyHud = $"{status["ac"]} ({countyPrioPlayer.Name})";
-                    TriggerServerEvent("UpdateHud", cityHud, countyHud, cityStatus, countyStatus);
-                }
-                else if (countyStatus == status["ac"])
-                {
-                    CommonFunctions.DrawWarning($"There is already an ~r~active ~w~priority in the ~b~{zone}!");
-                }
-                else
-                {
-                    CommonFunctions.DrawWarning("The ~r~priority ~w~in the ~bi~city ~w~is ~y~On Hold!");
-                }
-            }
         }
 
         public static void DrawText()
