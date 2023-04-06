@@ -49,6 +49,15 @@ namespace PrioScript
             PrioHud.UpdateHud(CityHud, CountyHud, cityStatus, countyStatus);
         }
 
+        [EventHandler("UpdatePrioPlayer")]
+        private void UpdatePrioPlayer(string zone, string playerHandle)
+        {
+            if (zone == "city")
+                PrioHud.cityPlayerHandle = playerHandle;
+            else if (zone == "county")
+                PrioHud.countyPlayerHandle = playerHandle;
+        }
+
         [EventHandler("PrioPause")]
         private void PrioPause(string zone)
         {
@@ -96,7 +105,6 @@ namespace PrioScript
             if (PrioHud.PrioCheck("city"))
             {
                 TriggerServerEvent("ActivatePrio", "city");
-                TriggerServerEvent("LogToDiscord", "staff", $"{Game.Player.Name} activated priority in the city");
             }
         }
 
@@ -105,7 +113,6 @@ namespace PrioScript
             if (PrioHud.PrioCheck("county"))
             {
                 TriggerServerEvent("ActivatePrio", "city");
-                TriggerServerEvent("LogToDiscord", "staff", $"{Game.Player.Name} activated priority in the county");
             }
         }
     }
