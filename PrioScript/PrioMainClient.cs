@@ -15,17 +15,17 @@ namespace PrioScript
             Tick += OnTick;
             EventHandlers["onClientResourceStart"] += new Action<string>(onClientResourceStart);
 
-            RegisterCommand("citypcd10", new Action(CityPrioCd10), false);
-            RegisterCommand("countypcd10", new Action(CountyPrioCd10), false);
+            RegisterCommand("cityp10", new Action(CityPrioCd10), false);
+            RegisterCommand("county10", new Action(CountyPrioCd10), false);
 
-            RegisterCommand("citypcd45", new Action(CityPrioCd45), false);
-            RegisterCommand("countypcd45", new Action(CountyPrioCd45), false);
+            RegisterCommand("city45", new Action(CityPrioCd45), false);
+            RegisterCommand("county45", new Action(CountyPrioCd45), false);
 
-            RegisterCommand("citypcd60", new Action(CityPrioCd60), false);
-            RegisterCommand("countypcd60", new Action(CountyPrioCd60), false);
+            RegisterCommand("city60", new Action(CityPrioCd60), false);
+            RegisterCommand("county60", new Action(CountyPrioCd60), false);
 
-            RegisterCommand("citypa", new Action(CityPrio), false);
-            RegisterCommand("countypa", new Action(CountyPrio), false);
+            RegisterCommand("cityps", new Action(CityPrio), false);
+            RegisterCommand("countyps", new Action(CountyPrio), false);
         }
 
         private async Task OnTick()
