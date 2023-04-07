@@ -73,13 +73,13 @@ namespace PrioScript
         private void CityPrioCd45()
         {
             if (PrioHud.CdCheck("city"))
-                TriggerServerEvent("CityPrioCd", 10);
+                TriggerServerEvent("CityPrioCd", 45);
         }
 
         private void CityPrioCd60()
         {
             if (PrioHud.CdCheck("city"))
-                TriggerServerEvent("CityPrioCd", 10);
+                TriggerServerEvent("CityPrioCd", 60);
         }
 
         private void CountyPrioCd10()
@@ -91,13 +91,13 @@ namespace PrioScript
         private void CountyPrioCd45()
         {
             if (PrioHud.CdCheck("county"))
-                TriggerServerEvent("CountyPrioCd", 10);
+                TriggerServerEvent("CountyPrioCd", 45);
         }
 
         private void CountyPrioCd60()
         {
             if (PrioHud.CdCheck("county"))
-                TriggerServerEvent("CountyPrioCd", 10);
+                TriggerServerEvent("CountyPrioCd", 60);
         }
 
         private void CityPrio()

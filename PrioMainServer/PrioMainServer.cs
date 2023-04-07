@@ -68,7 +68,7 @@ namespace PrioScript
                     {
                         break;
                     }
-                    CityHud = $"{status["cd"]} ({minutes} minutes)";
+                    CityHud = $"{status["cd"]} ({i} minutes)";
                     TriggerClientEvent("UpdateHud", CityHud, CountyHud, cityStatus, countyStatus);
                     await Delay(60000);
                 }
@@ -87,7 +87,7 @@ namespace PrioScript
                     {
                         break;
                     }
-                    CountyHud = $"{status["cd"]} ({minutes} minutes)";
+                    CountyHud = $"{status["cd"]} ({i} minutes)";
                     TriggerClientEvent("UpdateHud", CityHud, CountyHud, cityStatus, countyStatus);
                     await Delay(60000);
                 }
