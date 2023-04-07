@@ -83,7 +83,7 @@ namespace PrioScript
                     CommonFunctions.DrawWarning("You ~r~can't ~w~finish another user's priority!!");
                     return false;
                 }
-                else if (!player.IsPlaying)
+                else if (!cityPrioPlayer.IsPlaying)
                 {
                     return true;
                 }
@@ -105,7 +105,7 @@ namespace PrioScript
                     CommonFunctions.DrawWarning("You ~r~can't ~w~finish another user's priority!!");
                     return false;
                 }
-                else if (!player.IsPlaying)
+                else if (!countyPrioPlayer.IsPlaying)
                 {
                     return true;
                 }
