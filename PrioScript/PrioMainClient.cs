@@ -15,7 +15,7 @@ namespace PrioScript
             Tick += OnTick;
             EventHandlers["onClientResourceStart"] += new Action<string>(onClientResourceStart);
 
-            RegisterCommand("cityp10", new Action(CityPrioCd10), false);
+            RegisterCommand("city10", new Action(CityPrioCd10), false);
             RegisterCommand("county10", new Action(CountyPrioCd10), false);
 
             RegisterCommand("city45", new Action(CityPrioCd45), false);
@@ -50,12 +50,12 @@ namespace PrioScript
         }
 
         [EventHandler("UpdatePrioPlayer")]
-        private void UpdatePrioPlayer(string zone, Player sourcePlayer)
+        private void UpdatePrioPlayer(string zone, string playerName)
         {
             if (zone == "city")
-                PrioHud.cityPlayerName = sourcePlayer.Name;
+                PrioHud.cityPlayerName = playerName;
             else if (zone == "county")
-                PrioHud.countyPlayerName = sourcePlayer.Name;
+                PrioHud.countyPlayerName = playerName;
         }
 
         [EventHandler("PrioPause")]
