@@ -50,12 +50,12 @@ namespace PrioScript
         }
 
         [EventHandler("UpdatePrioPlayer")]
-        private void UpdatePrioPlayer(string zone, string playerName)
+        private void UpdatePrioPlayer(string zone, Player sourcePlayer)
         {
             if (zone == "city")
-                PrioHud.cityPlayerName = playerName;
+                PrioHud.cityPlayerName = sourcePlayer;
             else if (zone == "county")
-                PrioHud.countyPlayerName = playerName;
+                PrioHud.countyPlayerName = sourcePlayer;
         }
 
         [EventHandler("PrioPause")]

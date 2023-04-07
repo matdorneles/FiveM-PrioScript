@@ -22,8 +22,8 @@ namespace PrioScript
         private static string cityHud;
         private static string countyHud;
 
-        public static string cityPlayerName;
-        public static string countyPlayerName;
+        public static Player cityPrioPlayer;
+        public static Player countyPrioPlayer;
 
         public static void UpdateHud(string NewCityHud, string NewCountyHud, string newCityStatus, string newCountyStatus)
         {
@@ -70,7 +70,7 @@ namespace PrioScript
 
         public static bool CdCheck(string zone)
         {
-            string playerName = Game.Player.Name;
+            Player player = Game.Player;
             if (zone == "city")
             {
                 if (cityStatus == status["cd"])
@@ -78,10 +78,14 @@ namespace PrioScript
                     CommonFunctions.DrawWarning($"Priority in the {zone} is already in cooldown!!");
                     return false;
                 }
-                else if (cityPlayerName != playerName)
+                else if (cityPrioPlayer.Name != player.Name)
                 {
                     CommonFunctions.DrawWarning("You ~r~can't ~w~finish another user's priority!!");
                     return false;
+                }
+                else if (!player.IsPlaying)
+                {
+                    return true;
                 }
                 else
                 {
@@ -96,10 +100,14 @@ namespace PrioScript
                     CommonFunctions.DrawWarning($"Priority in the {zone} is already in cooldown!!");
                     return false;
                 }
-                else if (countyPlayerName != playerName)
+                else if (countyPrioPlayer.Name != player.Name)
                 {
                     CommonFunctions.DrawWarning("You ~r~can't ~w~finish another user's priority!!");
                     return false;
+                }
+                else if (!player.IsPlaying)
+                {
+                    return true;
                 }
                 else
                 {

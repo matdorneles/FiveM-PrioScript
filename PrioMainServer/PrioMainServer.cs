@@ -72,6 +72,9 @@ namespace PrioScript
                     TriggerClientEvent("UpdateHud", CityHud, CountyHud, cityStatus, countyStatus);
                     await Delay(60000);
                 }
+                cityStatus = status["av"];
+                CityHud = status["av"];
+                TriggerClientEvent("UpdateHud", CityHud, CountyHud, cityStatus, countyStatus);
             }
         }
 
@@ -91,6 +94,9 @@ namespace PrioScript
                     TriggerClientEvent("UpdateHud", CityHud, CountyHud, cityStatus, countyStatus);
                     await Delay(60000);
                 }
+                countyStatus = status["av"];
+                CountyHud = status["av"];
+                TriggerClientEvent("UpdateHud", CityHud, CountyHud, cityStatus, countyStatus);
             }
         }
 
@@ -103,7 +109,7 @@ namespace PrioScript
                 CityPlayer = sourcePlayer;
                 CityHud = $"{status["ac"]} ({CityPlayer.Name})";
                 TriggerClientEvent("UpdateHud", CityHud, CountyHud, cityStatus, countyStatus);
-                TriggerClientEvent("UpdatePrioPlayer", "city", sourcePlayer.Name);
+                TriggerClientEvent("UpdatePrioPlayer", "city", sourcePlayer);
             }
             else if (zone == "county" && countyStatus == status["av"])
             {
@@ -111,7 +117,7 @@ namespace PrioScript
                 CountyPlayer = sourcePlayer;
                 CountyHud = $"{status["ac"]} ({CountyPlayer.Name})";
                 TriggerClientEvent("UpdateHud", CityHud, CountyHud, cityStatus, countyStatus);
-                TriggerClientEvent("UpdatePrioPlayer", "county", sourcePlayer.Name);
+                TriggerClientEvent("UpdatePrioPlayer", "county", sourcePlayer);
             }
         }
     }
