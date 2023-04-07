@@ -53,9 +53,9 @@ namespace PrioScript
         private void UpdatePrioPlayer(string zone, Player sourcePlayer)
         {
             if (zone == "city")
-                PrioHud.cityPlayerName = sourcePlayer;
+                PrioHud.cityPrioPlayer = sourcePlayer;
             else if (zone == "county")
-                PrioHud.countyPlayerName = sourcePlayer;
+                PrioHud.countyPrioPlayer = sourcePlayer;
         }
 
         [EventHandler("PrioPause")]
