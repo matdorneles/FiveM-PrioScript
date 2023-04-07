@@ -22,8 +22,8 @@ namespace PrioScript
         private static string cityHud;
         private static string countyHud;
 
-        public static Player cityPrioPlayer;
-        public static Player countyPrioPlayer;
+        public static string cityPlayerName;
+        public static string countyPlayerName;
 
         public static void UpdateHud(string NewCityHud, string NewCountyHud, string newCityStatus, string newCountyStatus)
         {
@@ -70,7 +70,7 @@ namespace PrioScript
 
         public static bool CdCheck(string zone)
         {
-            Player player = Game.Player;
+            string playerName = Game.Player.Name;
             if (zone == "city")
             {
                 if (cityStatus == status["cd"])
@@ -78,14 +78,10 @@ namespace PrioScript
                     CommonFunctions.DrawWarning($"Priority in the {zone} is already in cooldown!!");
                     return false;
                 }
-                else if (cityPrioPlayer.Name != player.Name)
+                else if (cityPlayerName != playerName)
                 {
                     CommonFunctions.DrawWarning("You ~r~can't ~w~finish another user's priority!!");
                     return false;
-                }
-                else if (!cityPrioPlayer.IsPlaying)
-                {
-                    return true;
                 }
                 else
                 {
@@ -100,14 +96,10 @@ namespace PrioScript
                     CommonFunctions.DrawWarning($"Priority in the {zone} is already in cooldown!!");
                     return false;
                 }
-                else if (countyPrioPlayer.Name != player.Name)
+                else if (countyPlayerName != playerName)
                 {
                     CommonFunctions.DrawWarning("You ~r~can't ~w~finish another user's priority!!");
                     return false;
-                }
-                else if (!countyPrioPlayer.IsPlaying)
-                {
-                    return true;
                 }
                 else
                 {
