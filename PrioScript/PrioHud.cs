@@ -22,8 +22,8 @@ namespace PrioScript
         private static string cityHud;
         private static string countyHud;
 
-        public static string cityPlayerHandle;
-        public static string countyPlayerHandle;
+        public static string cityPlayerName;
+        public static string countyPlayerName;
 
         public static void UpdateHud(string NewCityHud, string NewCountyHud, string newCityStatus, string newCountyStatus)
         {
@@ -70,7 +70,7 @@ namespace PrioScript
 
         public static bool CdCheck(string zone)
         {
-            string playerHandle = Game.Player.Handle.ToString();
+            string playerName = Game.Player.Name;
             if (zone == "city")
             {
                 if (cityStatus == status["cd"])
@@ -78,13 +78,15 @@ namespace PrioScript
                     CommonFunctions.DrawWarning($"Priority in the {zone} is already in cooldown!!");
                     return false;
                 }
-                else if (cityPlayerHandle != playerHandle)
+                else if (cityPlayerName != playerName)
                 {
                     CommonFunctions.DrawWarning("You ~r~can't ~w~finish another user's priority!!");
                     return false;
                 }
-
-                return true;
+                else
+                {
+                    return true;
+                }
             }
 
             else if (zone == "county")
@@ -94,13 +96,15 @@ namespace PrioScript
                     CommonFunctions.DrawWarning($"Priority in the {zone} is already in cooldown!!");
                     return false;
                 }
-                else if (countyPlayerHandle != playerHandle)
+                else if (countyPlayerName != playerName)
                 {
                     CommonFunctions.DrawWarning("You ~r~can't ~w~finish another user's priority!!");
                     return false;
                 }
-
-                return true;
+                else
+                {
+                    return true;
+                }
             }
 
             return false;

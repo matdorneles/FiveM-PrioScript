@@ -103,15 +103,15 @@ namespace PrioScript
                 CityPlayer = sourcePlayer;
                 CityHud = $"{status["ac"]} ({CityPlayer.Name})";
                 TriggerClientEvent("UpdateHud", CityHud, CountyHud, cityStatus, countyStatus);
-                TriggerClientEvent("UpdatePrioPlayer", "city", sourcePlayer.Handle);
+                TriggerClientEvent("UpdatePrioPlayer", "city", sourcePlayer.Name);
             }
             else if (zone == "county" && countyStatus == status["av"])
             {
                 countyStatus = status["ac"];
                 CountyPlayer = sourcePlayer;
-                CityHud = $"{status["ac"]} ({CountyPlayer.Name})";
+                CountyHud = $"{status["ac"]} ({CountyPlayer.Name})";
                 TriggerClientEvent("UpdateHud", CityHud, CountyHud, cityStatus, countyStatus);
-                TriggerClientEvent("UpdatePrioPlayer", "county", sourcePlayer.Handle);
+                TriggerClientEvent("UpdatePrioPlayer", "county", sourcePlayer.Name);
             }
         }
     }
